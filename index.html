@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KAJOH Engineering Services Ltd</title>
+  
+  <!-- External Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #14212b; 
+      --muted: #64717a; 
+      --paper: #f7f7f4; 
+      --white: #fff;
+      --accent: #d38a22; 
+      --accent-dark: #9d5e0d; 
+      --line: #dde1df; 
+      --dark: #0d171e;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: "DM Sans", sans-serif; color: var(--ink); background: var(--paper); line-height: 1.65; }
+    .container { width: min(1160px, 92%); margin: auto; }
+
+    /* Header & Nav */
+    .site-header { position: sticky; top: 0; z-index: 50; background: rgba(13,23,30,.96); backdrop-filter: blur(12px); color: #fff; }
+    .nav { min-height: 76px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 11px; color: #fff; text-decoration: none; }
+    .brand-mark { display: grid; place-items: center; width: 42px; height: 42px; border: 2px solid var(--accent); font-family: "Space Grotesk"; font-size: 22px; font-weight: 700; }
+    .brand strong { display: block; font-family: "Space Grotesk"; font-size: 15px; letter-spacing: 1.2px; }
+    .brand small { display: block; font-size: 8px; letter-spacing: 1.3px; color: #bfc7ca; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { color: #dfe5e7; text-decoration: none; font-size: 14px; font-weight: 600; }
+    .nav-links a:hover { color: var(--accent); }
+    .menu-toggle { display: none; background: none; border: 0; color: #fff; font-size: 25px; cursor: pointer; }
+
+    /* Hero Section with Image Overlay */
+    .hero { 
+      min-height: 650px; 
+      display: flex; 
+      align-items: center; 
+      position: relative; 
+      background: linear-gradient(120deg, rgba(8,19,26,.92), rgba(8,19,26,.80)), 
+                  url("WhatsApp Image 2026-08-18 at 14.54.23.jpg") center/cover no-repeat; 
+    }
+    .hero:after { content: ""; position: absolute; inset: 0; opacity: .08; background-image: linear-gradient(135deg, #fff 1px, transparent 1px); background-size: 32px 32px; }
+    .hero-content { position: relative; z-index: 2; padding: 90px 0; color: #fff; max-width: 900px; }
+    .eyebrow { font-size: 12px; letter-spacing: 2.5px; font-weight: 700; color: var(--accent); margin-bottom: 15px; }
+    h1, h2, h3 { font-family: "Space Grotesk", sans-serif; line-height: 1.12; }
+    h1 { font-size: clamp(44px, 7vw, 78px); max-width: 880px; letter-spacing: -3px; }
+    h1 span { color: var(--accent); }
+    .hero-text { max-width: 670px; color: #c7d0d3; font-size: 18px; margin: 25px 0 32px; }
+    .hero-actions { display: flex; gap: 13px; flex-wrap: wrap; }
+    .btn { display: inline-block; padding: 13px 21px; text-decoration: none; font-weight: 700; border: 1px solid transparent; transition: .25s; cursor: pointer; }
+    .primary { background: var(--accent); color: #111; }
+    .primary:hover { background: #e6a341; transform: translateY(-2px); }
+    .outline { border-color: #75828a; color: #fff; }
+    .outline:hover { border-color: var(--accent); color: var(--accent); }
+    .hero-stats { display: flex; gap: 45px; margin-top: 65px; border-top: 1px solid #3b474e; padding-top: 25px; }
+    .hero-stats strong { display: block; font-family: "Space Grotesk"; font-size: 24px; }
+    .hero-stats span { font-size: 12px; color: #aeb9bd; }
+
+    /* Sections General */
+    .section { padding: 100px 0; }
+    h2 { font-size: clamp(34px, 4vw, 52px); letter-spacing: -1.7px; margin-bottom: 22px; }
+
+    /* About Section */
+    .about-grid { display: grid; grid-template-columns: 1.3fr .7fr; gap: 80px; align-items: center; }
+    .about-grid p { color: var(--muted); max-width: 700px; margin-bottom: 16px; }
+    .about-card { background: var(--white); padding: 40px; box-shadow: 0 20px 60px rgba(14,25,31,.08); border-top: 4px solid var(--accent); }
+    .card-icon { font-size: 38px; margin-bottom: 20px; }
+    .about-card h3 { font-size: 24px; margin-bottom: 10px; }
+    .about-card p { font-size: 14px; }
+    .line { height: 1px; background: var(--line); margin: 25px 0; }
+    .muted { color: #899398 !important; font-size: 12px; }
+
+    /* Projects Section */
+    .projects-section { background: #e9ece9; }
+    .section-heading { display: flex; justify-content: space-between; gap: 30px; align-items: flex-end; margin-bottom: 42px; }
+    .section-heading.simple { margin-bottom: 38px; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .filter { border: 1px solid #c9d0cd; background: transparent; padding: 8px 12px; font: 600 12px "DM Sans"; cursor: pointer; }
+    .filter.active, .filter:hover { background: var(--ink); color: #fff; border-color: var(--ink); }
+    .project-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .project-card { background: #fff; min-height: 310px; border: 1px solid #e0e3e1; transition: .25s; overflow: hidden; display: flex; flex-direction: column; position: relative; }
+    .project-card:hover { transform: translateY(-5px); box-shadow: 0 18px 45px rgba(14,25,31,.1); }
+    
+    /* Image styles inside cards */
+    .project-image-wrapper { width: 100%; height: 200px; overflow: hidden; background: #ddd; }
+    .project-image-wrapper img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+    .project-card:hover .project-image-wrapper img { transform: scale(1.05); }
+    .project-body { padding: 24px; flex-grow: 1; display: flex; flex-direction: column; }
+
+    .project-number { position: absolute; right: 20px; top: 17px; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.6); font-family: "Space Grotesk"; font-size: 13px; z-index: 2; }
+    .tag { display: inline-block; text-transform: uppercase; font-size: 9px; letter-spacing: 1.5px; color: var(--accent-dark); font-weight: 800; margin-bottom: 10px; }
+    .project-card h3 { font-size: 20px; margin-bottom: 12px; }
+    .project-card p:not(.tag) { font-size: 13px; color: var(--muted); }
+    .date { display: block; margin-top: auto; padding-top: 18px; font-size: 10px; letter-spacing: 1.5px; font-weight: 800; color: #899398; }
+    .source-note { margin-top: 25px; font-size: 11px; color: #707b7f; font-style: italic; }
+
+    /* Services Section */
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); }
+    .service { background: var(--white); padding: 30px; min-height: 210px; }
+    .service span { font-size: 11px; color: var(--accent); font-weight: 800; }
+    .service h3 { font-size: 20px; margin: 25px 0 12px; }
+    .service p { font-size: 13px; color: var(--muted); }
+
+    /* Contact Section */
+    .contact { background: var(--dark); color: #fff; padding: 95px 0; }
+    .contact-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 80px; align-items: center; }
+    .contact p:not(.eyebrow) { color: #aeb9bd; max-width: 600px; }
+    .contact-card { background: #17252e; padding: 35px; border: 1px solid #2b3941; }
+    .contact-card > div { padding: 14px 0; border-bottom: 1px solid #2c3a42; }
+    .contact-card span { display: block; color: #829096; font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; }
+    .contact-card strong { display: block; font-size: 14px; margin-top: 3px; }
+    .full { width: 100%; text-align: center; margin-top: 22px; }
+
+    .quotation-form {
+      display: none;
+      margin-top: 20px;
+      padding: 25px;
+      background: #fff;
+      color: var(--ink);
+      border: 1px solid #2b3941;
+    }
+
+    .quotation-form.open {
+      display: block;
+    }
+
+    .quotation-form label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .quotation-form input,
+    .quotation-form select,
+    .quotation-form textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cfd5d3;
+      background: #fff;
+      color: var(--ink);
+      font: 14px "DM Sans", sans-serif;
+      outline: none;
+    }
+
+    .quotation-form textarea {
+      resize: vertical;
+    }
+
+    .quotation-form input:focus,
+    .quotation-form select:focus,
+    .quotation-form textarea:focus {
+      border-color: var(--accent);
+    }
+
+    .quotation-form .full {
+      border: 0;
+      margin-top: 20px;
+    }
+
+    .quotation-success {
+      display: none;
+      margin-top: 15px;
+      padding: 12px;
+      background: #e8f5e9;
+      color: #246b2a;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Footer */
+    footer { background: #091117; color: #849096; padding: 23px 0; font-size: 11px; }
+    .footer-inner { display: flex; justify-content: space-between; gap: 20px; }
+
+    /* Responsive Breakpoints */
+    @media(max-width:850px) {
+      .nav-links { display: none; position: absolute; left: 0; right: 0; top: 76px; background: #0d171e; padding: 20px 5%; flex-direction: column; gap: 16px; }
+      .nav-links.open { display: flex; }
+      .menu-toggle { display: block; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .project-grid { grid-template-columns: repeat(2, 1fr); }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .section-heading { align-items: flex-start; flex-direction: column; }
+      .filters { justify-content: flex-start; }
+    }
+    @media(max-width:560px) {
+      .hero { min-height: 600px; }
+      .hero-content { padding: 65px 0; }
+      .hero-stats { gap: 18px; }
+      .hero-stats strong { font-size: 18px; }
+      .hero-stats span { font-size: 10px; }
+      .project-grid, .services-grid { grid-template-columns: 1fr; }
+      .section { padding: 70px 0; }
+      h1 { letter-spacing: -2px; }
+      .footer-inner { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav">
+        <a href="#" class="brand">
+          <div class="brand-mark">K</div>
+          <div>
+            <strong>KAJOH ENGINEERING SERVICES LTD</strong>
+            <small>YOUR TRUSTED ENGINEERING PARTNER</small>
+          </div>
+        </a>
+        <button class="menu-toggle" aria-label="Toggle menu">&#9776;</button>
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#projects">Projects</a>
+          <a href="#services">Services</a>
+          <a href="#contact">Contact</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-content">
+        <p class="eyebrow">CIVIL & STRUCTURAL ENGINEERING</p>
+        <h1>Building Reliable <span>Commercial & Industrial</span> Structures</h1>
+        <p class="hero-text">KAJOH Engineering Services Ltd specializes in commercial buildings, industrial warehouses, factories, residential complexes, and structural remodeling across Uganda.</p>
+        <div class="hero-actions">
+          <a href="#projects" class="btn primary">Our Projects</a>
+          <a href="#contact" class="btn outline">Contact Us</a>
+        </div>
+        <div class="hero-stats">
+          <div>
+            <strong>10+</strong>
+            <span>Major Projects</span>
+          </div>
+          <div>
+            <strong>100%</strong>
+            <span>Quality Engineering</span>
+          </div>
+          <div>
+            <strong>Kyengera</strong>
+            <span>Based in Uganda</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="about-grid">
+        <div>
+          <p class="eyebrow">ABOUT KAJOH ENGINEERING</p>
+          <h2>Engineering Excellence & Structural Precision</h2>
+          <p>KAJOH Engineering Services Ltd is a registered engineering firm delivering top-tier construction, structural remodeling, and industrial development solutions.</p>
+          <p>From large-scale manufacturing facilities and multi-story commercial buildings to residential developments, we manage projects from structural design to full execution.</p>
+        </div>
+        <div class="about-card">
+          <div class="card-icon">🏗️</div>
+          <h3>Registered & Verified</h3>
+          <p>Delivering high-standard construction solutions with full adherence to structural and civil engineering specifications.</p>
+          <div class="line"></div>
+          <p class="muted">Kyengera, Uganda</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="section projects-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">PROJECT PORTFOLIO</p>
+          <h2>Completed & Ongoing Works</h2>
+        </div>
+        <div class="filters">
+          <button class="filter active" data-filter="all">All Projects</button>
+          <button class="filter" data-filter="industrial">Industrial & Warehouses</button>
+          <button class="filter" data-filter="commercial">Commercial Buildings</button>
+          <button class="filter" data-filter="residential">Residential & Mixed-Use</button>
+        </div>
+      </div>
+
+      <div class="project-grid">
+
+        <div class="project-card" data-category="industrial">
+          <span class="project-number">01</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.09.jpeg" alt="Milling House Civil Works">
+          </div>
+          <div class="project-body">
+            <span class="tag">Industrial</span>
+            <h3>Milling House</h3>
+            <p>Location: Namanve (Aponge U, Ltd)</p>
+            <span class="date">COMPLETED: JAN 2019</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="industrial">
+          <span class="project-number">02</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.22(2).jpeg" alt="Jerrycan Molding Factory">
+          </div>
+          <div class="project-body">
+            <span class="tag">Industrial</span>
+            <h3>Jerrycan Molding Factory & Warehouse Extension</h3>
+            <p>Extension of warehouse at Quality Polybags.</p>
+            <span class="date">COMPLETED: JUNE 2021</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="commercial">
+          <span class="project-number">03</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.23(3).jpeg" alt="Commercial Building Construction">
+          </div>
+          <div class="project-body">
+            <span class="tag">Commercial</span>
+            <h3>Commercial Building Construction</h3>
+            <p>Bulange, Busiro Block 206 Plot 7808, Buira Wakiso District.</p>
+            <span class="date">COMPLETED: JULY 2024</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="industrial">
+          <span class="project-number">04</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.23(1).jpeg" alt="Matress Factory Construction">
+          </div>
+          <div class="project-body">
+            <span class="tag">Industrial</span>
+            <h3>Matress Factory Construction</h3>
+            <p>Location: Kasaje</p>
+            <span class="date">CIVIL WORKS</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="industrial">
+          <span class="project-number">05</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.23(2).jpeg" alt="Stores & Warehouse Construction">
+          </div>
+          <div class="project-body">
+            <span class="tag">Industrial</span>
+            <h3>Stores & Warehouse Construction</h3>
+            <p>Location: Kambobbo / Kankaba</p>
+            <span class="date">CIVIL WORKS</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="commercial">
+          <span class="project-number">06</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.21.jpeg" alt="Commercial Building Busega">
+          </div>
+          <div class="project-body">
+            <span class="tag">Commercial</span>
+            <h3>Commercial Building</h3>
+            <p>Location: Busega</p>
+            <span class="date">STRUCTURAL BUILDING</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="commercial">
+          <span class="project-number">07</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.23.jpeg" alt="Hotel Building Construction">
+          </div>
+          <div class="project-body">
+            <span class="tag">Commercial</span>
+            <h3>Hotel Building Construction</h3>
+            <p>Location: Masaka Road</p>
+            <span class="date">STRUCTURAL BUILDING</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="residential">
+          <span class="project-number">08</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.21(1).jpeg" alt="Mixed-Use Building">
+          </div>
+          <div class="project-body">
+            <span class="tag">Mixed-Use</span>
+            <h3>Mixed-Use Building Construction</h3>
+            <p>Masaka Road (Elvi General Merchants)</p>
+            <span class="date">DEVELOPMENT</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="residential">
+          <span class="project-number">09</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.22.jpeg" alt="Residential Building Remodeling">
+          </div>
+          <div class="project-body">
+            <span class="tag">Residential</span>
+            <h3>Residential Building Remodeling</h3>
+            <p>Location: Naluvule</p>
+            <span class="date">REMODELING & RENOVATION</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="residential">
+          <span class="project-number">10</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.45.39.jpeg" alt="Proposed Apartments">
+          </div>
+          <div class="project-body">
+            <span class="tag">Residential</span>
+            <h3>Proposed Apartments Construction</h3>
+            <p>Location: Nakawuka / Naluwonye</p>
+            <span class="date">PROPOSED PROJECT</span>
+          </div>
+        </div>
+
+        <div class="project-card" data-category="industrial">
+          <span class="project-number">11</span>
+          <div class="project-image-wrapper">
+            <img src="WhatsApp Image 2026-08-18 at 14.54.10.jpeg" alt="Namanve Kuku Proposed Warehouse">
+          </div>
+          <div class="project-body">
+            <span class="tag">Industrial</span>
+            <h3>Namanve Kuku Proposed Warehouse</h3>
+            <p>Proposed industrial warehouse facility in Namanve.</p>
+            <span class="date">PROPOSED PROJECT</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="source-note">* Use category buttons above to filter projects by construction type.</p>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="section">
+    <div class="container">
+      <div class="section-heading simple">
+        <div>
+          <p class="eyebrow">OUR CAPABILITIES</p>
+          <h2>Engineering & Construction Services</h2>
+        </div>
+      </div>
+
+      <div class="services-grid">
+        <div class="service">
+          <span>01</span>
+          <h3>Commercial Construction</h3>
+          <p>Multi-story commercial complexes, shopping hubs, and retail developments.</p>
+        </div>
+        <div class="service">
+          <span>02</span>
+          <h3>Industrial Warehouses</h3>
+          <p>Factories, milling houses, storage structures, and plant extensions.</p>
+        </div>
+        <div class="service">
+          <span>03</span>
+          <h3>Residential Development</h3>
+          <p>Modern apartment complexes, mixed-use buildings, and structural extensions.</p>
+        </div>
+        <div class="service">
+          <span>04</span>
+          <h3>Remodeling & Renovation</h3>
+          <p>Structural repairs, residential remodeling, and existing building upgrades.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="section contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div>
+          <p class="eyebrow">GET IN TOUCH</p>
+          <h2>Start Your Construction Project With Us</h2>
+          <p>Reach out to KAJOH Engineering Services Ltd for structural assessments, architectural planning, and general contracting services.</p>
+        </div>
+        <div class="contact-card">
+          <div>
+            <span>Contact Person</span>
+            <strong>Katungi Johnbosco</strong>
+          </div>
+          <div>
+            <span>Email address</span>
+            <strong>Katungijohnbosco@gmail.com</strong>
+          </div>
+          <div>
+            <span>Location</span>
+            <strong>Kyengera, Uganda</strong>
+          </div>
+          <button type="button" class="btn primary full" id="quotationBtn">Request Quotation</button>
+
+          <form id="quotationForm" class="quotation-form" action="https://formspree.io/f/mvkpdyrk" method="POST">
+            <input type="hidden" name="_subject" value="New Quotation Request - KAJOH Engineering Services Ltd">
+            <input type="hidden" name="_next" value="https://your-github-username.github.io/your-repository/">
+
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="Your full name" required>
+
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="Your email address" required>
+
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Your phone number" required>
+
+            <label for="project">Project Type</label>
+            <select id="project" name="project" required>
+              <option value="">Select project type</option>
+              <option>Commercial Construction</option>
+              <option>Industrial Warehouse</option>
+              <option>Residential Development</option>
+              <option>Remodeling & Renovation</option>
+              <option>Other</option>
+            </select>
+
+            <label for="location">Project Location</label>
+            <input type="text" id="location" name="location" placeholder="Where is the project located?" required>
+
+            <label for="message">Project Description</label>
+            <textarea id="message" name="message" rows="5" placeholder="Describe the work you need a quotation for..." required></textarea>
+
+            <button type="submit" class="btn primary full">Send Quotation Request</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <div>&copy; <span id="year"></span> KAJOH ENGINEERING SERVICES LTD. All rights reserved.</div>
+        <div>Kyengera, Uganda</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Embedded JavaScript -->
+  <script>
+    // Navigation Menu Toggle
+    const menuToggle = document.querySelector(".menu-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    menuToggle.addEventListener("click", () => {
+      navLinks.classList.toggle("open");
+    });
+
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => navLinks.classList.remove("open"));
+    });
+
+    // Project Filtering
+    const filters = document.querySelectorAll(".filter");
+    const cards = document.querySelectorAll(".project-card");
+
+    filters.forEach(filter => {
+      filter.addEventListener("click", () => {
+        filters.forEach(btn => btn.classList.remove("active"));
+        filter.classList.add("active");
+
+        const category = filter.dataset.filter;
+        cards.forEach(card => {
+          const show = category === "all" || card.dataset.category === category;
+          card.style.display = show ? "" : "none";
+        });
+      });
+    });
+
+    // Request Quotation Form
+    const quotationBtn = document.getElementById("quotationBtn");
+    const quotationForm = document.getElementById("quotationForm");
+
+    quotationBtn.addEventListener("click", () => {
+      quotationForm.classList.toggle("open");
+      quotationBtn.textContent = quotationForm.classList.contains("open")
+        ? "Close Quotation Form"
+        : "Request Quotation";
+
+      if (quotationForm.classList.contains("open")) {
+        quotationForm.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    });
+
+    // Dynamic Copyright Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
